@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1003050024306",
+    "firebase_url": "https://chating-1d854.firebaseio.com",
+    "project_id": "chating-1d854",
+    "storage_bucket": "chating-1d854.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003050024306:android:641ed9a8d0abbd90",
+        "android_client_info": {
+          "package_name": "chating.example.com.chating"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003050024306-91dm7ejilev3qpdvf619nvtdmio42f1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXPB_ww0xFpHO_95CKOmsS2fyRFPbygKE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

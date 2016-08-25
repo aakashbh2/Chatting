@@ -52,6 +52,7 @@ public class ChatRoom extends AppCompatActivity {
                 map2.put("name", user_name);
                 map2.put("msg", input_msg.getText().toString());
                 msg_root.updateChildren(map2);
+                input_msg.setText("");
             }
         });
 

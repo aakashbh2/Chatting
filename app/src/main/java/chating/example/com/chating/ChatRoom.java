@@ -1,7 +1,9 @@
 package chating.example.com.chating;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,16 +15,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class ChatRoom extends AppCompatActivity {
 
     Button btn_send_msg;
     EditText input_msg;
     TextView chat_conversation;
-
     String user_name, room_name, temp_key;
     DatabaseReference root;
 
@@ -34,7 +45,6 @@ public class ChatRoom extends AppCompatActivity {
         btn_send_msg = (Button) findViewById(R.id.sendbutton);
         input_msg = (EditText) findViewById(R.id.sendet);
         chat_conversation = (TextView) findViewById(R.id.textview);
-
         user_name = getIntent().getExtras().get("user_name").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
 
@@ -48,11 +58,16 @@ public class ChatRoom extends AppCompatActivity {
                 root.updateChildren(map);
 
                 DatabaseReference msg_root = root.child(temp_key);
+                String msg = input_msg.getText().toString();
                 Map<String, Object> map2 = new HashMap<String, Object>();
                 map2.put("name", user_name);
-                map2.put("msg", input_msg.getText().toString());
+                map2.put("msg", msg);
                 msg_root.updateChildren(map2);
                 input_msg.setText("");
+                if (room_name.equals("CleverBot")) {
+                    CleverBot cleverBot = new CleverBot(msg);
+                    cleverBot.execute();
+                }
             }
         });
 
@@ -79,10 +94,8 @@ public class ChatRoom extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
     }
 
     String chat_msg, chat_user_name;
@@ -95,6 +108,4 @@ public class ChatRoom extends AppCompatActivity {
             chat_conversation.append(chat_user_name + " : " + chat_msg + "\n");
         }
     }
-
-
 }
